@@ -1,5 +1,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/java,intellij+all,linux,windows,jetbrains+all
 
+## My custom notes
+notes.md
+
 ### Intellij+all ###
 
 # User-specific stuff
