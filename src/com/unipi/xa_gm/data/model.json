@@ -1,41 +1,41 @@
 [
         {
             "name" :"P1",
-            "timing" : 2000
+            "process_time" : 2000
         },
         {
             "name" :"P2",
-            "depends": ["P1"]
+            "dependencies": ["P1"]
         },
         {
             "name" :"P3",
-            "depends": ["P1"]
+            "dependencies": ["P1"]
         },
         {
             "name" :"P4",
-            "depends": ["P2"]
+            "dependencies": ["P2"]
         },
         {
             "name" :"P5",
-            "timing" : 1234,
-            "depends": ["P3"]
+            "process_time" : 1234,
+            "dependencies": ["P3"]
         },
         {
             "name" :"P6",
-            "timing" : 2345,
-            "depends": ["P3","P5"]
+            "process_time" : 2345,
+            "dependencies": ["P3","P5"]
         },
         {
             "name" :"P7",
-            "depends": ["P4"]
+            "dependencies": ["P4"]
         },
         {
             "name" :"P8",
-            "depends": ["P4","P7"]
+            "dependencies": ["P4","P7"]
         },
         {
             "name" :"P9",
-            "timing" : 1111,
-            "depends": ["P6","P8"]
+            "process_time" : 1111,
+            "dependencies": ["P6","P8"]
         }
 ]
