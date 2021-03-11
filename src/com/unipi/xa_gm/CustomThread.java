@@ -2,22 +2,34 @@ package com.unipi.xa_gm;
 
 
 import java.text.MessageFormat;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 
 public class CustomThread extends Thread{
 
-    private Random rand = new Random(System.currentTimeMillis());
+    private final Random rand = new Random(System.currentTimeMillis());
 
     private final long process_time;
-    private final List<CustomThread> dependency;
+    private List<CustomThread> dependency_list = new ArrayList<CustomThread>();
+    private String name;
 
+    //Basic Constructor for mapping
+    public CustomThread(String name, long process_time, List<CustomThread> dependency_list) {
+        super(name);
+        this.process_time = process_time;
+        this.dependency_list = dependency_list;
+    }
+
+    //Builder constructor (Constructor overloading)
     public CustomThread(Builder builder) {
         this.process_time=builder.process_time;
-        this.dependency=builder.dependency_list;
+        this.dependency_list=builder.dependency_list;
         super.setName(builder.name);
+    }
+
+    public CustomThread(String name) {
+        super(name);
+        this.process_time = 0;
     }
 
     /*
@@ -38,15 +50,21 @@ public class CustomThread extends Thread{
             return this;
         }
 
-        public Builder dependency_list (List<CustomThread> dependency_list) {
-            this.dependency_list = dependency_list;
-            for(CustomThread ct: dependency_list)
-                this.dependency_list.add(ct);
+        public Builder dependency_list_str (List<String> dependencies) {
+            List<CustomThread> dependencies_to_list = new ArrayList<CustomThread>();
+            for (String threadName : dependencies) {
+                CustomThread thread = new CustomThread.Builder()
+                        .name(threadName)
+                        .build();
+                dependencies_to_list.add(thread);
+            }
+            this.dependency_list=dependencies_to_list;
             return this;
         }
 
-        public Builder dependency (CustomThread ct) {
-                this.dependency_list.add(ct);
+        //In case we need it :D
+        public Builder dependency_list (List<CustomThread> dependency_list) {
+            this.dependency_list.addAll(dependency_list);
             return this;
         }
 
@@ -60,6 +78,8 @@ public class CustomThread extends Thread{
         }
     }
 
+
+    //Method Overriding
     public void run(){
         //TODO Remove this workload
         //workload begin
