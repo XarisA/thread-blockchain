@@ -1,7 +1,7 @@
 [
         {
             "name" :"P1",
-            "process_time" : 2000
+            "processTime" : 2000
         },
         {
             "name" :"P2",
@@ -17,12 +17,12 @@
         },
         {
             "name" :"P5",
-            "process_time" : 1234,
+            "processTime" : 1234,
             "dependencies": ["P3"]
         },
         {
             "name" :"P6",
-            "process_time" : 2345,
+            "processTime" : 2345,
             "dependencies": ["P3","P5"]
         },
         {
@@ -35,7 +35,7 @@
         },
         {
             "name" :"P9",
-            "process_time" : 1111,
+            "processTime" : 1111,
             "dependencies": ["P6","P8"]
         }
 ]
