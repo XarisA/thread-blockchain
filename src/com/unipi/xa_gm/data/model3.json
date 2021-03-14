@@ -5,30 +5,30 @@
   },
   {
     "name" :"P2",
-    "dependencies": ["P4"],
-    "processTime" : 1000
+    "processTime" : 2000
   },
   {
     "name" :"P3",
+    "dependencies": ["P1"],
     "processTime" : 3000
   },
   {
     "name" :"P4",
-    "processTime" : 6000,
-    "dependencies": ["P1"]
+    "processTime" : 4000,
+    "dependencies": ["P2"]
   },
   {
     "name" :"P5",
-    "dependencies": ["P2"]
+    "dependencies": ["P3"]
   },
   {
     "name" :"P6",
-    "processTime" : 2000,
-    "dependencies": ["P2"]
+    "processTime" : 3000,
+    "dependencies": ["P4"]
   },
   {
     "name" :"P7",
-    "dependencies": ["P6"],
+    "dependencies": ["P2"],
     "processTime" : 2000
   }
 ]

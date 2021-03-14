@@ -1,6 +1,9 @@
 package com.unipi.xa_gm;
 
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.text.MessageFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -8,8 +11,12 @@ import java.util.stream.Collectors;
 
 public class CustomThread extends Thread{
 
+    private final Random rand = new Random(System.currentTimeMillis());
+
     private long processTime;
     private List<CustomThread> dependencyList = new ArrayList<>();
+
+    private List<CustomThread> dependencyListBak = new ArrayList<>();
 
     private final long startTime = System.currentTimeMillis();
     private long executionTime;
@@ -17,9 +24,7 @@ public class CustomThread extends Thread{
 
     public long getExecutionTime() {return executionTime;}
 
-    public void setProcessTime(long processTime) {
-        this.processTime = processTime;
-    }
+    public void setProcessTime(long processTime) {this.processTime = processTime;}
     public long getProcessTime() {
         return processTime;
     }
@@ -27,6 +32,10 @@ public class CustomThread extends Thread{
     public List<CustomThread> getDependencyList() {
         return this.dependencyList;
     }
+    public List<String> getDependencyListFormated() {
+        return this.dependencyListBak.stream().map(x->x.getName()).collect(Collectors.toList());
+    }
+
     public void removeDependency(String customThread) {
         this.dependencyList.removeIf(x->x.getName().equals(customThread));
     }
@@ -40,14 +49,15 @@ public class CustomThread extends Thread{
     public CustomThread(Builder builder) {
         this.processTime =builder.processTime;
         this.dependencyList =builder.dependencyList;
+        this.dependencyListBak.addAll(this.dependencyList);
         super.setName(builder.name);
     }
 
     //TODO keep build pattern to theory
-    /*
-        Builder Design Pattern.
-        In this class it is used mainly for educational purposes
-    */
+    /**
+     * Builder Design Pattern.
+     * In this class it is used mainly for educational purposes
+     **/
     public static class Builder {
         private String name;
         private long processTime;
@@ -95,6 +105,9 @@ public class CustomThread extends Thread{
     //Method Overriding
     public void run(){
 
+//        for (int i=0;i<100000000 ;i++){
+//            rand.nextInt();
+//        }
         //TODO measure idle time instead of adding it
         try {
             idleTime=System.currentTimeMillis() - startTime;
@@ -108,14 +121,37 @@ public class CustomThread extends Thread{
             //TODO handle the exception
         }
         executionTime=System.currentTimeMillis() - startTime;
+
         //Print CurrentThread
-        print();
+        System.out.println(printMessage());
+        /**
+         * Uncomment next line to keep log in database
+         */
+        sqlLog(printMessage());
     }
 
-    //TODO fix this a little
-     public void print(){
-        System.out.println(MessageFormat.format("{1} ({0}) finished! Execution time: {2} sec, waited idle for:{3} sec, Process_time:{4} sec.",
-                 Thread.currentThread().getId(),Thread.currentThread().getName(),executionTime,idleTime,
-                CustomThread.this.getProcessTime()));
+    public String printMessage(){
+        return MessageFormat.format("{1} ({0}) finished! Execution time: {2} sec, waited idle for:{3} sec, Process time:{4} sec, Dependencies: {5}.",
+                Thread.currentThread().getId(),Thread.currentThread().getName(),executionTime,idleTime,
+                CustomThread.this.getProcessTime(),CustomThread.this.getDependencyListFormated());
+    }
+
+    public void sqlLog(String consoleOutput){
+        /**
+         * This method writes the given string to table "logs" in database
+         */
+        try {
+            String query="insert into logs (ConsoleOutput) values (?)";
+
+            Connection conn = SQLConnection.DBConnector();
+
+            assert conn != null;
+            PreparedStatement p = conn.prepareStatement(query);
+            p.setString(1,consoleOutput);
+
+            p.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }

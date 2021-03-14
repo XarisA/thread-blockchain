@@ -24,6 +24,10 @@ public class Parser {
     //TODO Add default Constructor with the default values
 
     public static CustomThread[] json() throws FileNotFoundException {
+        /*
+          This method parses the given json file and creates a list with the threads it contains
+          and then sets their attributes processTime and dependencies accordingly.
+         */
 
         String path = "src/com/unipi/xa_gm/data/model2.json";
         BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
@@ -41,11 +45,17 @@ public class Parser {
                     .dependencyListStr(mp[i].dependencies)
                     .build();
         }
+        System.out.println("File Parsed Successfully!");
         return ctList;
     }
 
 
         public static List<CustomThread> text() throws FileNotFoundException {
+            /*
+            This method parses the given text files, creates a list with the threads they contain
+            and then sets their attributes processTime and dependencies accordingly.
+            */
+
             String path1 = "src/com/unipi/xa_gm/data/p_timings.txt";
             String path2 = "src/com/unipi/xa_gm/data/p_precedence.txt";
 
@@ -76,6 +86,7 @@ public class Parser {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            System.out.println("File Parsed Successfully!");
             return ctList;
         }
 }
