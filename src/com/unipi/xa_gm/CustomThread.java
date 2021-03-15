@@ -131,8 +131,8 @@ public class CustomThread extends Thread{
     }
 
     public String printMessage(){
-        return MessageFormat.format("{1} ({0}) finished! Execution time: {2} sec, waited idle for:{3} sec, Process time:{4} sec, Dependencies: {5}.",
-                Thread.currentThread().getId(),Thread.currentThread().getName(),executionTime,idleTime,
+        return MessageFormat.format("{1} ({0}) finished! Execution time: {2} sec, waited idle for:{3} sec, Process time:{4} msec, Dependencies: {5}.",
+                Thread.currentThread().getId(),Thread.currentThread().getName(),(float)executionTime/1000,(float)idleTime/1000,
                 CustomThread.this.getProcessTime(),CustomThread.this.getDependencyListFormated());
     }
 

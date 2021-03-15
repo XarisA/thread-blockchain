@@ -12,12 +12,49 @@ public class ThreadSimulation {
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
 
     	//TODO add command line arguments for json or text and path. Also add path as parameter to Parser functions
+		List<CustomThread> parsedThreads = null;
 
-		System.out.println("-----APPLICATION START-----");
+		if (args.length == 0)
+		{
+			System.out.println("Running with default model.json");
 
-		//Choose Parser for json or txt
-		List<CustomThread> parsedThreads = Arrays.asList(Parser.json());
-//		List<CustomThread> parsedThreads = Parser.text();
+			//Choose Default Parser for json or txt
+			parsedThreads = Arrays.asList(Parser.json());
+//			parsedThreads = Parser.text();
+
+		}
+		else if (args.length == 1){
+			for(String argument: args)
+			{
+				switch (argument)
+				{
+					case "json":
+						parsedThreads = Arrays.asList(Parser.json());
+						System.out.println("Running with model.json");
+						break;
+					case "text":
+						parsedThreads = Parser.text();
+						System.out.println("Running with p_precedence.txt and p_timings.txt");
+						break;
+					case "exit":
+						System.exit(0);
+						break;
+					default:
+						System.out.println("Please choose 'json' to execute for model.json or 'text' to choose 'p_precedence.txt' and 'p_timings.txt'");
+						System.exit(1);
+				}
+			}
+		}
+		else{
+			System.out.println("Unrecognized input, running with model.json'");
+			parsedThreads = Arrays.asList(Parser.json());
+			System.out.println("Running with default model.json");
+		}
+
+
+		System.out.println("-----APPLICATION START-----\n");
+
+
 
 		System.out.println("-----Thread Simulation-----");
 		//Main application

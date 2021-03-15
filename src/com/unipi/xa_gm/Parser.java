@@ -29,7 +29,7 @@ public class Parser {
           and then sets their attributes processTime and dependencies accordingly.
          */
 
-        String path = "src/com/unipi/xa_gm/data/model2.json";
+        String path = "data/model.json";
         BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
 
         Gson g = new Gson();
@@ -56,8 +56,8 @@ public class Parser {
             and then sets their attributes processTime and dependencies accordingly.
             */
 
-            String path1 = "src/com/unipi/xa_gm/data/p_timings.txt";
-            String path2 = "src/com/unipi/xa_gm/data/p_precedence.txt";
+            String path1 = "data/p_timings.txt";
+            String path2 = "data/p_precedence.txt";
 
             List<CustomThread> ctList = null;
             try (Stream<String> stream = Files.lines(Paths.get(path2))) {
@@ -85,6 +85,7 @@ public class Parser {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+                System.exit(2);
             }
             System.out.println("File Parsed Successfully!");
             return ctList;
