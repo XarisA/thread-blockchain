@@ -11,8 +11,6 @@ import java.util.stream.Collectors;
 
 public class CustomThread extends Thread{
 
-    private final Random rand = new Random(System.currentTimeMillis());
-
     private long processTime;
     private List<CustomThread> dependencyList = new ArrayList<>();
 
@@ -53,7 +51,7 @@ public class CustomThread extends Thread{
         super.setName(builder.name);
     }
 
-    //TODO keep build pattern to theory
+
     /**
      * Builder Design Pattern.
      * In this class it is used mainly for educational purposes
@@ -63,12 +61,6 @@ public class CustomThread extends Thread{
         private long processTime;
         private List<CustomThread> dependencyList;
 
-        public void setProcessTime(long processTime) {
-            this.processTime = processTime;
-        }
-        public long getProcessTime() {
-            return processTime;
-        }
 
         public Builder() {
             this.processTime = 0;
@@ -105,10 +97,6 @@ public class CustomThread extends Thread{
     //Method Overriding
     public void run(){
 
-//        for (int i=0;i<100000000 ;i++){
-//            rand.nextInt();
-//        }
-        //TODO measure idle time instead of adding it
         try {
             idleTime=System.currentTimeMillis() - startTime;
             for (CustomThread dependency:dependencyList){
@@ -118,7 +106,6 @@ public class CustomThread extends Thread{
             Thread.sleep(processTime);
         } catch (InterruptedException e) {
             e.printStackTrace();
-            //TODO handle the exception
         }
         executionTime=System.currentTimeMillis() - startTime;
 

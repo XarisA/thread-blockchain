@@ -11,7 +11,6 @@ public class ThreadSimulation {
 
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
 
-    	//TODO add command line arguments for json or text and path. Also add path as parameter to Parser functions
 		List<CustomThread> parsedThreads = null;
 
 		if (args.length == 0)
@@ -54,8 +53,6 @@ public class ThreadSimulation {
 
 		System.out.println("-----APPLICATION START-----\n");
 
-
-
 		System.out.println("-----Thread Simulation-----");
 		//Main application
 		threadExecuter(parsedThreads);
@@ -81,7 +78,6 @@ public class ThreadSimulation {
 		 * and from the given list.
 		 * For every thread with dependencies, it adds it to a new list
 		 * Finally it runs recursively for the new list
-		 *
 		 * When this method runs it ensures that every thread begins executing according
 		 * to the parsed files (if possible)
 		 * */
@@ -93,9 +89,7 @@ public class ThreadSimulation {
 					noDepThreadsList.add(customThreads.get(i));
 					customThreads.get(i).start();
 				}
-				else{
-					newList.add(customThreads.get(i));
-				}
+				else{newList.add(customThreads.get(i));}
 			}
 			for (int i=0;i<noDepThreadsList.size();i++) {
 				noDepThreadsList.get(i).join();

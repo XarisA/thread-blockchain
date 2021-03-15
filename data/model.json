@@ -1,41 +1,22 @@
-[
-        {
-            "name" :"P1",
-            "processTime" : 2000
-        },
-        {
-            "name" :"P2",
-            "dependencies": ["P1"]
-        },
-        {
-            "name" :"P3",
-            "dependencies": ["P1"]
-        },
-        {
-            "name" :"P4",
-            "dependencies": ["P2"]
-        },
-        {
-            "name" :"P5",
-            "processTime" : 1234,
-            "dependencies": ["P3"]
-        },
-        {
-            "name" :"P6",
-            "processTime" : 2345,
-            "dependencies": ["P3","P5"]
-        },
-        {
-            "name" :"P7",
-            "dependencies": ["P4"]
-        },
-        {
-            "name" :"P8",
-            "dependencies": ["P4","P7"]
-        },
-        {
-            "name" :"P9",
-            "processTime" : 1111,
-            "dependencies": ["P6","P8"]
-        }
+[ {"name" :"P1",
+   "processTime" : 2000},
+  {"name" :"P2",
+   "dependencies": ["P1"]},
+  {"name" :"P3",
+   "dependencies": ["P1"]},
+  {"name" :"P4",
+   "dependencies": ["P2"]},
+  {"name" :"P5",
+   "processTime" : 1234,
+   "dependencies": ["P3"]},
+  {"name" :"P6",
+   "processTime" : 2345,
+   "dependencies": ["P3","P5"]},
+  {"name" :"P7",
+   "dependencies": ["P4"]},
+  {"name" :"P8",
+   "dependencies": ["P4","P7"]},
+  {"name" :"P9",
+   "processTime" : 1111,
+   "dependencies": ["P6","P8"]}
 ]

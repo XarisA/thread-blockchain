@@ -29,7 +29,7 @@ public class Parser {
           and then sets their attributes processTime and dependencies accordingly.
          */
 
-        String path = "data/model.json";
+        String path = "data/model3.json";
         BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
 
         Gson g = new Gson();
