@@ -8,8 +8,8 @@ It is a java console application, which given a file describing thread prioritie
 
 ## Usage
 
-```shell
-java -jar thread-blockchain.jar help
+```java
+$ java -jar thread-blockchain.jar help
 
 usage: Please choose 'json' to execute for model.json or 'text' to choose 'p_precedence.txt' and 'p_timings.txt'
 
