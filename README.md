@@ -8,7 +8,7 @@ It is a java console application, which given a file describing thread prioritie
 
 ## Usage
 
-```java
+```
 $ java -jar thread-blockchain.jar help
 
 usage: Please choose 'json' to execute for model.json or 'text' to choose 'p_precedence.txt' and 'p_timings.txt'
@@ -16,10 +16,10 @@ usage: Please choose 'json' to execute for model.json or 'text' to choose 'p_pre
 arguments:
   help,    show this help message and exit
   json,    use model.json as input
-  text,    use 'p_precedence.txt' and 'p_timings.txt'
+  text,    use 'p_precedence.txt' and 'p_timings.txt' as inputs
 ```
 
-**text File Example**
+### Text file
 
 A priority file (p_precedence.txt) for 9 threads could be be the following:
 
@@ -49,12 +49,39 @@ P8
 P9 1111
 ```
 
-Επεξηγήσεις αρχείων:
+#### Text file explanation
 
-- Το αρχείο *p_precedence.txt* περιγράφει ότι το νήμα Ρ1 δεν έχει εξάρτηση από κάποιο άλλο νήμα και μπορεί να εκτελεστεί. Τα υπόλοιπα νήματα στο συγκεκριμένο παράδειγμα έχουν εξαρτήσεις είτε από 1, είτε από 2 άλλα νήματα και μπορούν να εκτελεστούν μετά την ολοκλήρωση των νημάτων από τα οποία εξαρτώνται. Φυσικά, οι εξαρτήσεις μπορούν να είναι οποιασδήποτε μορφής και οποιουδήποτε πλήθους. Θα παρατηρήσετε βέβαια ότι σε πολλές περιπτώσεις, νήματα θα εκτελούνται και παράλληλα, ανάλογα με το input των αρχείων.
-- Το αρχείο *p_timings.txt* περιέχει το χρόνο επεξεργασίας σε milliseconds, του κάθε
-νήματος (πόσο χρόνο θα εκτελείται πριν ολοκληρωθεί). Απουσία χρόνου σημαίνει
-άμεση ολοκλήρωση της εκτέλεσης του νήματος.
+- The *p_precedence.txt* file describes that thread named P1 has no dependency on any thread, thus can start. The other threads in this example have dependencies on either one or two threads, and can be executed only after completion of their dependencies. Of course, the dependencies can be of any form and any number. You will notice that in many cases, threads will be executed in parallel, depending on the input of the files.
+- The file *p_timings.txt* contains the processing time, in milliseconds, of each thread (how long it will run before it completes). Absence of time means immediate completion of thread execution.
+
+### JSON file example
+
+The same logic is applied in this JSON file. 
+
+```json
+[ {"name" :"P1",
+   "processTime" : 2000},
+  {"name" :"P2",
+   "dependencies": ["P1"]},
+  {"name" :"P3",
+   "dependencies": ["P1"]},
+  {"name" :"P4",
+   "dependencies": ["P2"]},
+  {"name" :"P5",
+   "processTime" : 1234,
+   "dependencies": ["P3"]},
+  {"name" :"P6",
+   "processTime" : 2345,
+   "dependencies": ["P3","P5"]},
+  {"name" :"P7",
+   "dependencies": ["P4"]},
+  {"name" :"P8",
+   "dependencies": ["P4","P7"]},
+  {"name" :"P9",
+   "processTime" : 1111,
+   "dependencies": ["P6","P8"]}
+]
+```
 
 ## Demo
 
