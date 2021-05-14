@@ -2,9 +2,8 @@
 
 *project name: thread-blockchain*
 
-**Abstract**
-This application implements a small "network" of threads, based on specific "priorities" given as input by the user.
-It is a java console application, which given a file describing thread priorities and a file containing processing times for each thread, creates a simulation.
+This application implements a small _network_ of threads, based on specific _priorities_ given as input by the user.
+It is a java console application which creates a simulation, given a file describing thread priorities and a file containing processing times for each thread.
 
 ## Usage
 
@@ -18,6 +17,32 @@ arguments:
   json,    use model.json as input
   text,    use 'p_precedence.txt' and 'p_timings.txt' as inputs
 ```
+
+## Features
+
+- Blockchain the simulation
+- Save to database (SQLite)
+
+### Blockchain
+
+Every run of the application records the thread execution steps in a simple (and unique) blockchain, each block of which includes the following information:
+- the unique identifier of the blockchain (which is also key for the entire simulation)
+- the name of the thread
+- the thread execution time
+- the thread dependency list
+- the execution timestamp.
+
+### Save to database
+
+#### Simulation
+
+![image](https://user-images.githubusercontent.com/3985557/118321120-d781bd00-b505-11eb-8be3-eb0e04a70e65.png)
+
+#### Execution Log
+
+![image](https://user-images.githubusercontent.com/3985557/118321134-dc467100-b505-11eb-8488-54fa4bae515f.png)
+
+## File Examples
 
 ### Text file
 
