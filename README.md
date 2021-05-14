@@ -3,15 +3,25 @@
 *project name: thread-blockchain*
 
 **Abstract**
-Η παρούσα εφαρμογή υλοποιεί ένα μικρό «δίκτυο» νημάτων (Threads), βάσει συγκεκριμένων «προτεραιοτήτων» οι οποίες δίδονται ως input από το χρήστη.
+This application implements a small "network" of threads, based on specific "priorities" given as input by the user.
+It is a java console application, which given a file describing thread priorities and a file containing processing times for each thread, creates a simulation.
 
-**Logic** 
-Η βασική λειτουργία της εφαρμογής είναι η εξής: 
-Η συγκεκριμένη εφαρμογή είναι ένα java console application, το οποίο δοθέντος ενός αρχείου που περιγράφει προτεραιότητες νημάτων και ενός αρχείου που περιέχει χρόνους επεξεργασίας για το κάθε νήμα, δημιουργεί μια προσομοίωση.
+## Usage
 
-**Example**
-Ένα αρχείο καταγραφής προτεραιοτήτων (p_precedence.txt) για 9 Threads θα μπορούσε να
-είναι το ακόλουθο:
+```shell
+java -jar thread-blockchain.jar help
+
+usage: Please choose 'json' to execute for model.json or 'text' to choose 'p_precedence.txt' and 'p_timings.txt'
+
+arguments:
+  help,    show this help message and exit
+  json,    use model.json as input
+  text,    use 'p_precedence.txt' and 'p_timings.txt'
+```
+
+**text File Example**
+
+A priority file (p_precedence.txt) for 9 threads could be be the following:
 
 ```csv
 P1
@@ -24,8 +34,8 @@ P7 waitfor P4
 P8 waitfor P4,P7
 P9 waitfor P6,P8
 ```
-Ενώ το αντίστοιχο αρχείο χρόνων επεξεργασίας (p_timings.txt) για τα παραπάνω 9 Threads
-θα μπορούσε να είναι το ακόλουθο:
+
+While the corresponding processing times file (p_timings.txt) for the above 9 Threads could be the following:
 
 ```csv
 P1 2000
@@ -38,6 +48,7 @@ P7
 P8
 P9 1111
 ```
+
 Επεξηγήσεις αρχείων:
 
 - Το αρχείο *p_precedence.txt* περιγράφει ότι το νήμα Ρ1 δεν έχει εξάρτηση από κάποιο άλλο νήμα και μπορεί να εκτελεστεί. Τα υπόλοιπα νήματα στο συγκεκριμένο παράδειγμα έχουν εξαρτήσεις είτε από 1, είτε από 2 άλλα νήματα και μπορούν να εκτελεστούν μετά την ολοκλήρωση των νημάτων από τα οποία εξαρτώνται. Φυσικά, οι εξαρτήσεις μπορούν να είναι οποιασδήποτε μορφής και οποιουδήποτε πλήθους. Θα παρατηρήσετε βέβαια ότι σε πολλές περιπτώσεις, νήματα θα εκτελούνται και παράλληλα, ανάλογα με το input των αρχείων.
