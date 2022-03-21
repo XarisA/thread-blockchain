@@ -5,6 +5,11 @@
 This application implements a small _network_ of threads, based on specific _priorities_ given as input by the user.
 It is a java console application which creates a simulation, given a file describing thread priorities and a file containing processing times for each thread.
 
+## Demo
+
+![Thread-Modeling](https://user-images.githubusercontent.com/3985557/118312804-989a3a00-b4fa-11eb-99b0-73af1357e0fa.gif)
+
+
 ## Usage
 
 ```
@@ -107,7 +112,3 @@ The same logic is applied in this JSON file.
    "dependencies": ["P6","P8"]}
 ]
 ```
-
-## Demo
-
-![Thread-Modeling](https://user-images.githubusercontent.com/3985557/118312804-989a3a00-b4fa-11eb-99b0-73af1357e0fa.gif)
